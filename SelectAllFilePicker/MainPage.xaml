@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="SelectAllFilePicker.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:SelectAllFilePicker"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <StackPanel
+        x:Name="LayoutRoot"
+        Height="640"
+        VerticalAlignment="Bottom"
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <AutoSuggestBox
+            x:Name="SuggestBox"
+            PlaceholderText="Search some info!"
+            QueryIcon="AlignRight" />
+        <Button x:Name="SearchBtn" Content="SearchButton">
+            <Button.Flyout>
+                <Flyout Placement="Bottom">
+                    <StackPanel>
+                        <AutoSuggestBox x:Name="MiniSuggsetBox" PlaceholderText="search some info..." />
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+                <VisualState x:Name="Normal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SuggestBox.Visibility" Value="Visible" />
+                        <Setter Target="SearchBtn.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Hide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SuggestBox.Visibility" Value="Collapsed" />
+                        <Setter Target="SearchBtn.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </StackPanel>
+</Page>
